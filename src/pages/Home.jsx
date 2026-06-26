@@ -243,7 +243,7 @@
 
 
           {/* Contact Section */}
-          <section id="contact" className="min-h-screen w-full bg-cover overflow-hidden bg-top" style={{backgroundImage: "url('./lufi.png')"}}>
+          <section id="contact" className="min-h-screen w-full bg-cover overflow-hidden bg-top" style={{backgroundImage: "linear-gradient(to right, rgba(0,0,11,.85), rgba(0,0,80,.3)), url('./lufi.png')"}}>
             <div className='bg-black/40 backdrop-blur-sm rounded-xl p-6 relative top-15 left-10 w-[600px]'>
               <div className='flex flex-col gap-3.5'>
                 <h2 className="text-white text-2xl font-bold mb-2 self-center">Get In Touch</h2>
@@ -253,6 +253,7 @@
               <button className='border border-white/30 rounded-sm tracking-widest text-white px-1 py-2  transition-transform duration-300 hover:scale-105 hover:bg-black/20' onClick={sendEmail}>Send</button>
                 {success && <p className="text-green-400 text-sm mt-2">Message sent successfully!</p>}
               </div>
+              
 
           </div>
           </section>
