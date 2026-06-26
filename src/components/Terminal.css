@@ -1,0 +1,108 @@
+/* Main Container: Added margin, glass effect, and smooth hover transition */
+.terminal-container {
+  background-color: rgba(30, 30, 30, 0.6); /* Slightly transparent */
+  backdrop-filter: blur(12px); /* Glassmorphism effect */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle white border */
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+  width: 100%;
+  max-width: 500px; 
+  margin: 40px auto 20px auto; /* 40px top margin pushes it away from the avatar */
+  font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 14px; /* Slightly smaller for a cleaner fit */
+  line-height: 1.7;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Make it pop slightly when you hover over it */
+.terminal-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(138, 43, 226, 0.15); /* Adds a very faint glow */
+}
+
+/* Top bar of the window: Adjusted padding */
+.terminal-header {
+  background-color: rgba(45, 45, 45, 0.8);
+  padding: 14px 18px; /* Slightly more padding */
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot.red { background-color: #ff5f56; }
+.dot.yellow { background-color: #ffbd2e; }
+.dot.green { background-color: #27c93f; }
+
+.terminal-title {
+  color: #858585;
+  font-size: 13px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: 0.5px;
+}
+
+/* The actual code area: Increased padding */
+.terminal-body {
+  padding: 24px 28px; /* Much better breathing room inside the box */
+  color: #d4d4d4;
+  overflow-x: auto;
+}
+
+.terminal-body pre {
+  margin: 0;
+}
+
+/* --- CUSTOM SCROLLBAR --- */
+/* This fixes the thick white scrollbar shown in your screenshots */
+.terminal-body::-webkit-scrollbar {
+  height: 6px; /* Thin, modern scrollbar */
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2); 
+  border-radius: 10px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2); 
+  border-radius: 10px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4); 
+}
+
+/* Syntax Highlighting Colors (VS Code Dark+ Theme) */
+.keyword { color: #569cd6; }    
+.variable { color: #4fc1ff; }   
+.operator { color: #d4d4d4; }   
+.key { color: #9cdcfe; }        
+.string { color: #ce9178; }     
+.boolean { color: #569cd6; }    
+
+/* The Blinking Cursor Animation */
+.cursor {
+  color: #d4d4d4;
+  font-weight: bold;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
