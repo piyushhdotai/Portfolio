@@ -28,7 +28,7 @@ const TerminalBlock = () => {
             <br />
             {'  '}<span className="key">techStack:</span> [<span className="string">"JavaScript"</span>, <span className="string">"React.js"</span>, <span className="string">"Node.js"</span>, <span className="string">"MongoDB"</span>],
             <br />
-            {'  '}<span className="key">recentBuilds:</span> [<span className="string">"NagarSeva"</span>, <span className="string">"Profanity Blur"</span>],
+            {'  '}<span className="key">recentBuilds:</span> [<span className="string">"NagarSeva"</span>, <span className="string">"Portfolio website"</span>],
             <br />
             {'  '}<span className="key">hobbies:</span> [<span className="string">"Gym"</span>, <span className="string">"Running"</span>, <span className="string">"F1"</span>, <span className="string">"Photography"</span>],
             <br />
