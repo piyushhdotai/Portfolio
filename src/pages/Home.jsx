@@ -23,6 +23,7 @@
     const [email, setEmail] = useState("")
     const [message, setMessage] = useState("")
     const [success, setSuccess] = useState(false)
+    
 
 
     const sendEmail = () => {
@@ -63,7 +64,7 @@ useEffect(() => {
 
 
     useGSAP(() => {
-    
+
     // B - stagger text fade up
     gsap.from(".hero-text > *", {
       y: 60,
@@ -81,6 +82,7 @@ useEffect(() => {
   }, {  scope: heroRef })
 
   useGSAP(() => {
+    const sections = [".about-section", ".work-section", ".contact-section"]
   // About - avatar slides from left
   gsap.from(".about-left", {
     x: -100,
@@ -156,13 +158,31 @@ useEffect(() => {
     start: "top 85%",
   }
 })
+sections.forEach((section) => {
+  gsap.fromTo(section,
+    { y: 100 },
+    {
+      y: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+      }
+    }
+  )
+})
    } )
+  
+
+
 
 
 
   
     return (
-      <div  className='hero-bg min-h-screen w-screen bg-cover bg-center   overflow-x-hidden' >
+      <div  className='hero-bg min-h-screen w-screen bg-cover bg-center  bg-slate-950  overflow-x-hidden' >
 
 
           {/* Glow for the bg on the home page */}
@@ -225,7 +245,7 @@ useEffect(() => {
 
 
           {/* About Section */}
-          <section id="about" className="  items-center sticky top-0 z-20 about-section min-h-screen bg-slate-950 ">
+          <section id="about" className="about-section pt-20 items-center sticky top-0 z-20 about-section min-h-screen bg-slate-950 ">
             <div className='flex  flex-col md:flex-row '>
 
 
@@ -275,7 +295,7 @@ useEffect(() => {
 
 
           {/* Work/Project Section */}
-          <section id="work" className="sticky top-0 z-30 min-h-screen  bg-slate-950  overflow-x-hidden">
+          <section id="work" className="pt-20 work-section sticky top-0 z-30 min-h-screen  bg-slate-950  overflow-x-hidden">
 
             <div className='px-10 pt-20 pb-10'>
     <p className="text-teal-400 text-sm tracking-widest uppercase font-['Montserrat'] mb-2 sub-animation">What I've Built</p>
@@ -318,7 +338,7 @@ useEffect(() => {
 
 
           {/* Contact Section */}
-          <section id="contact" className="sticky top-0 z-40 min-h-screen w-full bg-cover overflow-hidden bg-top" style={{backgroundImage: "linear-gradient(to right, rgba(0,0,11,.85), rgba(0,0,80,.3)), url('./lufi.png')"}}>
+          <section id="contact" className="contact-section sticky top-0 z-40 min-h-screen w-full bg-cover overflow-hidden bg-top" style={{backgroundImage: "linear-gradient(to right, rgba(0,0,11,.85), rgba(0,0,80,.3)), url('./lufi.png')"}}>
 
             <div className='bg-black/40 backdrop-blur-sm rounded-xl p-6 relative top-15 left-[5%] md:left-10 w-[90%] md:w-[600px] contact-form'>
               <div className='flex flex-col gap-3.5'>
