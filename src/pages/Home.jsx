@@ -4,7 +4,6 @@
   import { Badge } from "@/components/ui/badge"
   import { ArrowDownToLine } from 'lucide-react';
   import TerminalBlock from '@/components/TerminalBlock';
-  import AvatarFlip from '@/components/AvatarFlip'
   import ProjectCard from '@/components/ProjectCard';
   import emailjs from '@emailjs/browser'
   import gsap from 'gsap'
@@ -156,31 +155,11 @@ useEffect(() => {
   scrollTrigger: {
     trigger: ".contact-form",
     start: "top 85%",
-  }
-})
-sections.forEach((section) => {
-  gsap.fromTo(section,
-    { y: 100 },
-    {
-      y: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top bottom",
-        end: "top top",
-        scrub: true,
-      }
     }
-  )
-})
-   } )
+  })
+} )
   
 
-
-
-
-
-  
     return (
       <div  className='hero-bg min-h-screen w-screen bg-cover bg-center  bg-slate-950  overflow-x-hidden' >
 
@@ -245,7 +224,7 @@ sections.forEach((section) => {
 
 
           {/* About Section */}
-          <section id="about" className="about-section pt-20 items-center sticky top-0 z-20 about-section min-h-screen bg-slate-950 ">
+          <section id="about" className="about-section pt-20 items-center sticky top-0 z-20 min-h-screen bg-slate-950 ">
             <div className='flex  flex-col md:flex-row '>
 
 
@@ -254,7 +233,7 @@ sections.forEach((section) => {
             
                 <div className='w-full h-90  flex flex-col items-center gap-6'>
                   <img src="/pfp.jpeg" alt="avtar" className='h-60 w-60 rounded-full relative top-20 transition-transform duration-300 hover:scale-110' />
-                  {/* <AvatarFlip/> */}
+                  
                 </div>
 
                 <div>
@@ -297,7 +276,7 @@ sections.forEach((section) => {
           {/* Work/Project Section */}
           <section id="work" className="pt-20 work-section sticky top-0 z-30 min-h-screen  bg-slate-950  overflow-x-hidden">
 
-            <div className='px-10 pt-20 pb-10'>
+            <div className='px-10 pb-10'>
     <p className="text-teal-400 text-sm tracking-widest uppercase font-['Montserrat'] mb-2 sub-animation">What I've Built</p>
     <h1 className='text-white font-bold text-6xl heading-animation'>Projects</h1>
     <div className="mt-3 h-1 w-16 bg-teal-400 rounded-full sub-animation" />
@@ -305,7 +284,7 @@ sections.forEach((section) => {
   </div>
 
 
-            <div className='  relative top-5 grid grid-cols-1 md:grid-cols-3 gap-6 px-10 project-card'>
+            <div className=' grid grid-cols-1 md:grid-cols-3 gap-6 px-10 project-card'>
 
 
             <ProjectCard
