@@ -246,7 +246,8 @@ useEffect(() => {
             <div className="w-full md:w-1/2 text-white">
             <h1 className='font-bold text-5xl px-5 py-20 about-right'>ABOUT ME</h1>
               <p className=" about-right font-['Inter'] font-normal text-gray-400 text-2xl px-5 py-3">
-                <b>Hello</b>, I am <b>PIYUSH BAJPAI</b>, a 3rd year B.Tech student passionate about building full stack web apps. I love turning ideas into clean, functional products.
+                <b>Hello</b>, I am <b>PIYUSH BAJPAI</b>, I am a Computer Science student who enjoys building projects and learning new technologies. I like solving problems, writing clean code, and creating things that people can use.
+
               </p>
               
               <div className='px-3 py-3 flex gap-3 about-right'>
