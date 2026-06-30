@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import gsap from 'gsap'
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
   const cursorRef = useRef(null)
@@ -21,6 +22,7 @@ function App() {
   return (
     <div className='relative overflow-x-hidden'>
       <div ref={cursorRef} className='fixed top-0 left-0 w-4 h-4 rounded-full bg-teal-400/50 pointer-events-none z-[9999] blur-xs' />
+      <Analytics />
       <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
       <Home setActiveSection={setActiveSection} />
     </div>
