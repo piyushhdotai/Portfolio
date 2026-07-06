@@ -10,6 +10,19 @@
   src: url('/src/assets/fonts/Brushed.ttf');
 }
 
+html, body, * {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+/* 2. Nuke the Webkit scrollbar for Chrome/Safari/Brave */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
 
 
 @theme inline {
