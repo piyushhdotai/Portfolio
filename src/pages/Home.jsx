@@ -259,7 +259,7 @@ useEffect(() => {
               <Badge className="text-gray-300 text-sm"  variant="outline">MongoDB</Badge> 
               </div> 
               <div className='px-30 py-20 button-right'>
-                <a href="#" download>
+                <a href="/Piyush_Bajpai_resume.pdf" download>
                   <button className="text-2xl border border-white rounded-3xl px-3 py-2 transition-transform duration-300 hover:scale-105">
                   <div className="flex items-center gap-2">
                   <span>Download Resume</span>
