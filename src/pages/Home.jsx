@@ -216,7 +216,7 @@ scrollTrigger: {
             </div>
 
             <div>
-              <h2 className=" text-4xl font-bold">80+</h2>
+              <h2 className=" text-4xl font-bold">100+</h2>
               <p className=" text-gray-400">Leetcode</p>
             </div>
 
