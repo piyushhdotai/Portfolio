@@ -1,10 +1,10 @@
 /* Main Container: Upgraded with a rich gradient and smooth bezier transitions */
 .terminal-container {
-  background: linear-gradient(145deg, rgba(20, 20, 25, 0.7), rgba(10, 10, 15, 0.9));
+  background: linear-gradient(145deg, rgba(21, 28, 32, 0.86), rgba(13, 17, 20, 0.96));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px; /* Slightly rounder edges look more modern */
+  border-radius: 12px;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
   width: 100%;
   max-width: 520px; /* Gave it just a tiny bit more width */
@@ -14,14 +14,14 @@
   line-height: 1.7;
   overflow: hidden;
   /* Custom cubic-bezier makes the hover pop feel incredibly premium */
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Premium Hover Effect */
 .terminal-container:hover {
   transform: translateY(-6px) scale(1.01);
   /* Adjusted the glow to match your site's Teal theme instead of purple */
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(45, 212, 191, 0.15); 
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(130, 216, 209, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.15); /* Border subtly brightens on hover */
 }
 
@@ -53,7 +53,7 @@
 .dot.green { background-color: #00CA4E; }
 
 .terminal-title {
-  color: #a1a1aa; 
+  color: #9AA5B1;
   font-size: 13px;
   font-weight: 500;
   position: absolute;
@@ -104,7 +104,7 @@
 
 /* The Blinking Cursor Animation */
 .cursor {
-  color: #4fd1c5; /* Teal cursor to match the theme */
+  color: #67E8F9;
   font-weight: bold;
   animation: blink 1s step-end infinite;
   margin-left: 2px;
