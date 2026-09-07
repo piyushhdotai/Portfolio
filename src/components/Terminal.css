@@ -7,6 +7,7 @@
   border-radius: 12px;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
   width: 100%;
+  min-width: 0;
   max-width: 520px; /* Gave it just a tiny bit more width */
   margin: 40px auto 20px auto;
   font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', 'Courier New', monospace;
@@ -68,6 +69,23 @@
   padding: 24px 28px 28px; 
   color: #e4e4e7; /* Slightly brighter base text for contrast */
   overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .terminal-container {
+    margin: 0 auto;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .terminal-header {
+    padding: 12px 14px;
+  }
+
+  .terminal-body {
+    padding: 18px 14px 20px;
+    overflow-x: auto;
+  }
 }
 
 .terminal-body pre {

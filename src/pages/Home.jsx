@@ -19,6 +19,7 @@ gsap.registerPlugin(ScrollTrigger)
 const Home = (props) => {
 
   const heroRef = useRef(null) 
+  const technologies = ['HTML', 'CSS', 'TailwindCSS', 'JavaScript', 'React', 'Node.js', 'MongoDB', 'FastAPI']
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -75,19 +76,25 @@ const Home = (props) => {
 useEffect(() => {
 const handleScroll = () => {
   const sections = ['home', 'about', 'work', 'contact']
-  const scrollY = window.scrollY
+  const navbarBoundary = 90
+  let activeId = sections[0]
+  let closestTop = Number.NEGATIVE_INFINITY
 
   sections.forEach(id => {
     const el = document.getElementById(id)
     if (!el) return
-    const { offsetTop, offsetHeight } = el
-    if (scrollY >= offsetTop - offsetHeight / 3 && scrollY < offsetTop + offsetHeight) {
-      props.setActiveSection(id)
+    const { top } = el.getBoundingClientRect()
+    if (top <= navbarBoundary && top > closestTop) {
+      activeId = id
+      closestTop = top
     }
   })
+
+  props.setActiveSection(activeId)
 }
 
 window.addEventListener('scroll', handleScroll)
+handleScroll()
 return () => window.removeEventListener('scroll', handleScroll)
 }, [])
 
@@ -191,7 +198,15 @@ scrollTrigger: {
         <div className="pointer-events-none absolute left-[58%] top-1/4 h-72 w-72 rounded-full bg-nocturne-accent/10 blur-[120px]" />
 
         {/* Home Section */}
-        <section ref={heroRef} id='home' className='home-section sticky top-0 z-10 flex min-h-screen items-center border-b border-nocturne-accent/10 px-6 pt-28 md:px-16 md:pt-20'>
+        <section ref={heroRef} id='home' className='home-section sticky top-0 z-10 flex min-h-screen items-start border-b border-nocturne-accent/10 px-5 pt-32 md:items-center md:px-16 md:pt-20'>
+          <div className="tech-cloud pointer-events-none absolute left-5 right-5 top-[64%] z-10 mx-auto flex max-w-[22rem] flex-wrap justify-center gap-x-3 gap-y-3 md:top-[45%] md:max-w-[34rem] lg:left-auto lg:right-[8%] lg:top-1/2 lg:mx-0 lg:block lg:h-72 lg:w-80">
+            {technologies.map((technology, index) => (
+              <span key={technology} className={`tech-tag tech-tag-${index + 1}`}>
+                {technology}
+              </span>
+            ))}
+          </div>
+
           <div className="pointer-events-none absolute right-[12%] top-1/2 hidden h-[26rem] w-[26rem] -translate-y-1/2 md:block">
             <div className="absolute inset-12 rounded-full border border-nocturne-accent/30" />
             <div className="absolute inset-24 rounded-full border border-nocturne-accent/20" />
@@ -200,9 +215,9 @@ scrollTrigger: {
           </div>
           <div className='hero-text relative z-10 max-w-3xl text-nocturne-text'>
             <p className="mb-6 font-display text-xs font-medium uppercase tracking-[0.28em] text-nocturne-accent">Independent developer / 2026</p>
-            <h1 className="font-display text-7xl font-semibold leading-[0.88] tracking-[-0.06em] md:text-[10rem]">Piyush</h1>
-            <h1 className="mt-5 font-display text-2xl tracking-[0.08em] text-nocturne-accent md:text-4xl">Full Stack Developer</h1>
-            <div className="mt-5 flex items-center gap-3">
+            <h1 className="font-display text-[clamp(4.5rem,22vw,7rem)] font-semibold leading-[0.88] tracking-[-0.06em] md:text-[10rem]">Piyush</h1>
+            <h1 className="mt-5 font-display text-xl tracking-[0.06em] text-nocturne-accent sm:text-2xl md:text-4xl">Full Stack Developer</h1>
+            <div className="mt-5 flex items-start gap-3 text-sm sm:text-base">
             <div className="h-2 w-2 rounded-full bg-nocturne-accent" />
             <span className="text-nocturne-muted">
               Building clean web experiences
@@ -226,6 +241,12 @@ scrollTrigger: {
             </div>
 
           </div>
+        </div>
+
+        <div className="absolute bottom-24 left-5 right-5 flex items-center gap-3 text-[0.58rem] uppercase tracking-[0.22em] text-nocturne-muted md:hidden">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-nocturne-accent" />
+          <span className="whitespace-nowrap">Scroll to explore</span>
+          <span className="h-px flex-1 bg-nocturne-accent/20" />
         </div>
         
 
@@ -253,14 +274,14 @@ scrollTrigger: {
       <div className='relative w-full z-20 bg-nocturne-base'>
           
          {/* About Section */}
-        <section id="about" className="about-section sticky top-0 z-10 flex min-h-screen items-center px-6 py-28 md:px-16">
-          <div className='relative z-10 grid w-full max-w-7xl gap-12 md:grid-cols-[1.15fr_0.85fr] md:items-center md:gap-20'>
-            <div className="about-left relative">
+        <section id="about" className="about-section sticky top-0 z-10 flex min-h-screen items-center px-5 py-28 md:px-16">
+          <div className='relative z-10 grid min-w-0 w-full max-w-7xl gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-center md:gap-20'>
+            <div className="about-left relative min-w-0">
               <div className="pointer-events-none absolute -inset-10 rounded-full bg-nocturne-accent/5 blur-3xl" />
               <TerminalBlock/>
             </div>
 
-          <div className="text-nocturne-text md:pt-8">
+          <div className="min-w-0 text-nocturne-text md:pt-8">
           <p className="about-right mb-5 font-display text-xs font-medium uppercase tracking-[0.25em] text-nocturne-accent">A little context</p>
           <h1 className="font-display text-4xl font-semibold tracking-tight text-nocturne-text md:text-5xl">
             ABOUT ME
@@ -291,7 +312,7 @@ scrollTrigger: {
 
 
         {/* Work/Project Section */}
-        <section id="work" className="work-section sticky top-0 z-20 min-h-screen overflow-x-hidden bg-nocturne-base px-6 py-28 md:px-16">
+        <section id="work" className="work-section sticky top-0 z-20 min-h-screen overflow-x-hidden bg-nocturne-base px-5 py-28 md:px-16">
           <div className='relative z-10 mx-auto max-w-7xl'>
             
             <div className='pb-10'>
@@ -338,13 +359,13 @@ scrollTrigger: {
        </div>
 
         {/* Contact Section */}
-        <section id="contact" className="contact-section sticky top-0 z-40 min-h-screen w-full overflow-hidden border-t border-nocturne-accent/10 bg-nocturne-base px-6 py-28 md:px-16">
+        <section id="contact" className="contact-section sticky top-0 z-40 min-h-screen w-full overflow-hidden border-t border-nocturne-accent/10 bg-nocturne-base px-5 py-28 md:px-16">
           <div className="pointer-events-none absolute right-[-8rem] top-1/4 h-96 w-96 rounded-full bg-nocturne-accent/10 blur-[140px]" />
           <div className="relative z-10 mx-auto max-w-7xl">
             <div className="mb-14 max-w-2xl">
               <p className="mb-5 font-display text-xs font-medium uppercase tracking-[0.25em] text-nocturne-accent">The next build starts here</p>
-              <h2 className="font-display text-5xl font-semibold tracking-tight text-nocturne-text md:text-7xl">Get In Touch</h2>
-              <p className="mt-5 text-lg leading-relaxed text-nocturne-muted">Have a project, idea, or problem worth working through? Send a message and let&apos;s make something useful.</p>
+              <h2 className="font-display text-4xl font-semibold tracking-tight text-nocturne-text sm:text-5xl md:text-7xl">Get In Touch</h2>
+              <p className="mt-5 text-base leading-relaxed text-nocturne-muted sm:text-lg">Have a project, idea, or problem worth working through? Send a message and let&apos;s make something useful.</p>
             </div>
             <div className='contact-form grid gap-10 md:grid-cols-[minmax(0,1fr)_16rem] md:items-end'>
               <div className='flex max-w-2xl flex-col gap-3.5'>

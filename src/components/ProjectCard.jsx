@@ -12,7 +12,7 @@ import {
 export function ProjectCard(props) {
   return (
     <Card className="relative mx-auto flex h-full w-full flex-col bg-nocturne-surface pt-0 text-nocturne-text ring-nocturne-accent/15 transition-transform duration-500 hover:-translate-y-1">
-      <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden">
+      <div className={`relative w-full shrink-0 overflow-hidden ${props.featured ? 'aspect-[16/9]' : 'aspect-[16/9] md:h-28 md:aspect-auto'}`}>
         <div className="pointer-events-none absolute inset-0 z-10 bg-black/25" />
         <img
           src={props.image}

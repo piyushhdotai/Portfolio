@@ -142,3 +142,46 @@ body::-webkit-scrollbar,
     scroll-padding-top: var(--navbar-height);
     }
 }
+
+  .tech-tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(103, 232, 249, 0.24);
+    border-radius: 999px;
+    padding: 0.5rem 0.8rem;
+    color: rgba(229, 233, 240, 0.72);
+    background: rgba(19, 26, 36, 0.58);
+    font-family: 'Geist', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    backdrop-filter: blur(8px);
+    animation: tech-float 5s ease-in-out infinite;
+  }
+
+  .tech-tag:nth-child(2n) {
+    animation-delay: -1.8s;
+  }
+
+  .tech-tag:nth-child(3n) {
+    animation-delay: -3.2s;
+  }
+
+  @media (min-width: 1024px) {
+    .tech-tag {
+      position: absolute;
+    }
+
+    .tech-tag-1 { left: 8%; top: 10%; }
+    .tech-tag-2 { right: 5%; top: 22%; }
+    .tech-tag-3 { left: 22%; top: 34%; }
+    .tech-tag-4 { right: 18%; top: 45%; }
+    .tech-tag-5 { left: 2%; top: 58%; }
+    .tech-tag-6 { right: 0; top: 68%; }
+    .tech-tag-7 { left: 18%; top: 80%; }
+    .tech-tag-8 { right: 24%; top: 88%; }
+  }
+
+  @keyframes tech-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }

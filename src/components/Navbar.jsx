@@ -7,6 +7,12 @@ const NAVBAR_EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
 function Navbar(props) {
   const navRef = useRef(null)
 
+  const handleNavigation = (event, section) => {
+    event.preventDefault()
+    props.setActiveSection(section)
+    document.getElementById(section)?.scrollIntoView({ behavior: 'auto', block: 'start' })
+  }
+
   useEffect(() => {
     const updateNavbar = () => {
       const isDocked = window.scrollY > NAVBAR_HEIGHT
@@ -31,24 +37,24 @@ function Navbar(props) {
 
     <nav ref={navRef} className="fixed left-0 top-0 z-[100] h-[var(--navbar-height)] w-full border-b border-transparent px-6 text-nocturne-text md:px-10">
     <div className="mx-auto flex h-full max-w-7xl items-center justify-between">
-      <a href="#" onClick={() => props.setActiveSection("home")} className="font-display text-sm font-semibold tracking-[0.18em] text-nocturne-accent">
+      <a href="#home" onClick={(event) => handleNavigation(event, "home")} className="font-display text-sm font-semibold tracking-[0.18em] text-nocturne-accent">
         PB
       </a>
       <div className="flex items-center gap-5 text-[0.68rem] font-medium tracking-[0.18em] md:gap-10 md:text-xs">
 
-      <a href="#" onClick={() => props.setActiveSection("home")} className={props.activeSection === "home" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
+      <a href="#home" onClick={(event) => handleNavigation(event, "home")} className={props.activeSection === "home" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
         HOME
       </a>
 
-      <a href="#about" onClick={() => props.setActiveSection("about")} className={props.activeSection === "about" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
+      <a href="#about" onClick={(event) => handleNavigation(event, "about")} className={props.activeSection === "about" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
         ABOUT
       </a>
 
-      <a href="#work" onClick={() => props.setActiveSection("work")} className={props.activeSection === "work" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
+      <a href="#work" onClick={(event) => handleNavigation(event, "work")} className={props.activeSection === "work" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
         WORK
       </a>
 
-      <a href="#contact" onClick={() => props.setActiveSection("contact")} className={props.activeSection === "contact" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
+      <a href="#contact" onClick={(event) => handleNavigation(event, "contact")} className={props.activeSection === "contact" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
         CONTACT
       </a>
 
