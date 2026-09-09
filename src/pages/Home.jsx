@@ -25,25 +25,40 @@ const Home = (props) => {
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [success, setSuccess] = useState(false)
-  
+  const [error, setError] = useState("")
+  const [sending, setSending] = useState(false)
+
+  const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 
   const sendEmail = () => {
-    if (!name || !email || !message) {
-    alert("Please fill in all fields before sending the message.")
-    return
-  }
+    setSuccess(false)
+    setError("")
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setError("Please fill in all fields before sending the message.")
+      return
+    }
+    if (!isValidEmail(email.trim())) {
+      setError("Please enter a valid email address.")
+      return
+    }
+
+    setSending(true)
     emailjs.send(
-    import.meta.env.VITE_EMAILJS_SERVICE_ID,
-    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-    { name, email, message },
-    import.meta.env.VITE_EMAILJS_PUBLIC_KEY, 
-    setSuccess(true)
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      { name, email, message },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
     ).then(() => {
-    setSuccess(true)
-    setName("")
-    setEmail("")
-    setMessage("")
-  })
+      setSuccess(true)
+      setName("")
+      setEmail("")
+      setMessage("")
+    }).catch(() => {
+      setError("Something went wrong while sending your message. Please try again.")
+    }).finally(() => {
+      setSending(false)
+    })
 }
 // Add this right after your state variables
   useEffect(() => {
@@ -253,16 +268,16 @@ scrollTrigger: {
 
         <div className='absolute bottom-8 right-6 flex gap-5 text-nocturne-accent md:right-16 md:top-1/2 md:-translate-y-1/2 md:flex-col'>
 
-        <a className='social-icon  transition-opacity cursor-pointer' href="https://github.com/piyushhdotai">
+        <a className='social-icon  transition-opacity cursor-pointer' href="https://github.com/piyushhdotai" target="_blank" rel="noopener noreferrer">
         <FaGithub size={25}/>
         </a>
         
 
-        <a className='social-icon hover:opacity-70 transition-opacity cursor-pointer' href="https://www.linkedin.com/in/piyushhdotai/?skipRedirect=true">
+        <a className='social-icon hover:opacity-70 transition-opacity cursor-pointer' href="https://www.linkedin.com/in/piyushhdotai/?skipRedirect=true" target="_blank" rel="noopener noreferrer">
         <FaLinkedin size={25} />
         </a>
 
-        <a className='social-icon hover:opacity-70 transition-opacity cursor-pointer' href="https://leetcode.com/u/piyushh_7274/">
+        <a className='social-icon hover:opacity-70 transition-opacity cursor-pointer' href="https://leetcode.com/u/piyushh_7274/" target="_blank" rel="noopener noreferrer">
         <SiLeetcode size={25} />
         </a>
 
@@ -369,16 +384,19 @@ scrollTrigger: {
             </div>
             <div className='contact-form grid gap-10 md:grid-cols-[minmax(0,1fr)_16rem] md:items-end'>
               <div className='flex max-w-2xl flex-col gap-3.5'>
-              <input className="bg-transparent border border-nocturne-accent/30 text-nocturne-text rounded-md px-4 py-3 w-full placeholder-nocturne-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" />
-              <input className="bg-transparent border border-nocturne-accent/30 text-nocturne-text rounded-md px-4 py-3 w-full placeholder-nocturne-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your Email" />
-              <textarea className="bg-transparent border border-nocturne-accent/30 text-nocturne-text rounded-md px-4 py-3 w-full placeholder-nocturne-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Your Message" />
-              <button className='bg-nocturne-accent text-nocturne-base rounded-md tracking-widest px-1 py-2 transition-colors duration-300 hover:bg-nocturne-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent' onClick={sendEmail}>Send</button>
-              {success && <p className="text-nocturne-accent text-sm mt-2">Message sent successfully!</p>}
+              <input className="bg-transparent border border-nocturne-accent/30 text-nocturne-text rounded-md px-4 py-3 w-full placeholder-nocturne-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" disabled={sending} />
+              <input type="email" className="bg-transparent border border-nocturne-accent/30 text-nocturne-text rounded-md px-4 py-3 w-full placeholder-nocturne-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your Email" disabled={sending} />
+              <textarea className="bg-transparent border border-nocturne-accent/30 text-nocturne-text rounded-md px-4 py-3 w-full placeholder-nocturne-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Your Message" disabled={sending} />
+              <button className='bg-nocturne-accent text-nocturne-base rounded-md tracking-widest px-1 py-2 transition-colors duration-300 hover:bg-nocturne-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nocturne-accent disabled:cursor-not-allowed disabled:opacity-60' onClick={sendEmail} disabled={sending}>{sending ? "Sending..." : "Send"}</button>
+              <p className="text-sm mt-2" role="status" aria-live="polite">
+                {error && <span className="text-red-400">{error}</span>}
+                {!error && success && <span className="text-nocturne-accent">Message sent successfully!</span>}
+              </p>
               </div>
               <div className="flex gap-5 border-t border-nocturne-accent/20 pt-5 text-nocturne-accent md:flex-col md:border-l md:border-t-0 md:pl-6 md:pt-0">
-                <a className="transition-colors hover:text-nocturne-accent-hover" href="https://github.com/piyushhdotai"><FaGithub size={22} /></a>
-                <a className="transition-colors hover:text-nocturne-accent-hover" href="https://www.linkedin.com/in/piyushhdotai/?skipRedirect=true"><FaLinkedin size={22} /></a>
-                <a className="transition-colors hover:text-nocturne-accent-hover" href="https://leetcode.com/u/piyushh_7274/"><SiLeetcode size={22} /></a>
+                <a className="transition-colors hover:text-nocturne-accent-hover" href="https://github.com/piyushhdotai" target="_blank" rel="noopener noreferrer"><FaGithub size={22} /></a>
+                <a className="transition-colors hover:text-nocturne-accent-hover" href="https://www.linkedin.com/in/piyushhdotai/?skipRedirect=true" target="_blank" rel="noopener noreferrer"><FaLinkedin size={22} /></a>
+                <a className="transition-colors hover:text-nocturne-accent-hover" href="https://leetcode.com/u/piyushh_7274/" target="_blank" rel="noopener noreferrer"><SiLeetcode size={22} /></a>
               </div>
             </div>
           </div>
