@@ -1,66 +1,35 @@
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
+import { navItems } from '@/data/content'
+import { handleAnchorClick } from '@/lib/scroll'
 
-const NAVBAR_HEIGHT = 88
-const NAVBAR_EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
-
-function Navbar(props) {
-  const navRef = useRef(null)
-
-  const handleNavigation = (event, section) => {
-    event.preventDefault()
-    props.setActiveSection(section)
-    document.getElementById(section)?.scrollIntoView({ behavior: 'auto', block: 'start' })
-  }
-
-  useEffect(() => {
-    const updateNavbar = () => {
-      const isDocked = window.scrollY > NAVBAR_HEIGHT
-
-      gsap.to(navRef.current, {
-        backgroundColor: isDocked ? '#131A24' : 'rgba(19, 26, 36, 0)',
-        backdropFilter: isDocked ? 'blur(14px)' : 'blur(0px)',
-        borderBottomColor: isDocked ? 'rgba(154, 165, 177, 0.24)' : 'rgba(154, 165, 177, 0)',
-        duration: 0.45,
-        ease: NAVBAR_EASE,
-        overwrite: true,
-      })
-    }
-
-    updateNavbar()
-    window.addEventListener('scroll', updateNavbar, { passive: true })
-
-    return () => window.removeEventListener('scroll', updateNavbar)
-  }, [])
-  
+function Navbar({ activeSection }) {
   return (
-
-    <nav ref={navRef} className="fixed left-0 top-0 z-[100] h-[var(--navbar-height)] w-full border-b border-transparent px-6 text-nocturne-text md:px-10">
-    <div className="mx-auto flex h-full max-w-7xl items-center justify-between">
-      <a href="#home" onClick={(event) => handleNavigation(event, "home")} className="font-display text-sm font-semibold tracking-[0.18em] text-nocturne-accent">
-        PB
-      </a>
-      <div className="flex items-center gap-5 text-[0.68rem] font-medium tracking-[0.18em] md:gap-10 md:text-xs">
-
-      <a href="#home" onClick={(event) => handleNavigation(event, "home")} className={props.activeSection === "home" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
-        HOME
-      </a>
-
-      <a href="#about" onClick={(event) => handleNavigation(event, "about")} className={props.activeSection === "about" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
-        ABOUT
-      </a>
-
-      <a href="#work" onClick={(event) => handleNavigation(event, "work")} className={props.activeSection === "work" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
-        WORK
-      </a>
-
-      <a href="#contact" onClick={(event) => handleNavigation(event, "contact")} className={props.activeSection === "contact" ? "relative text-nocturne-accent after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-nocturne-accent" : "text-nocturne-muted transition-colors hover:text-nocturne-accent-hover"}>
-        CONTACT
-      </a>
-
-      </div>
-    </div>
-
+    <nav
+      aria-label="Primary"
+      className="nav-pill fixed left-1/2 top-4 z-50 -translate-x-1/2 rounded-2xl border border-white/5 bg-surface/85 p-1.5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-md"
+    >
+      <ul className="flex items-center gap-0.5">
+        {navItems.map(({ id, label, icon: Icon }) => {
+          const active = activeSection === id
+          return (
+            <li key={id} className="group relative">
+              <a
+                href={`#${id}`}
+                onClick={handleAnchorClick}
+                aria-label={label}
+                aria-current={active ? 'location' : undefined}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors duration-300 ${
+                  active ? 'bg-raised text-orange' : 'text-white/80 hover:bg-raised hover:text-white'
+                }`}
+              >
+                <Icon size={18} strokeWidth={1.8} />
+              </a>
+              <span className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-md bg-paper px-2 py-1 text-[0.7rem] font-medium text-ink opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                {label}
+              </span>
+            </li>
+          )
+        })}
+      </ul>
     </nav>
   )
 }
